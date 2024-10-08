@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Photoshop Selection Tools Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Special Elite', cursive;
+            line-height: 1.6;
+            color: #ff69b4;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(#add8e6 1px, transparent 1px),
+                linear-gradient(90deg, #add8e6 1px, transparent 1px),
+                linear-gradient(#add8e6 0.5px, transparent 0.5px),
+                linear-gradient(90deg, #add8e6 0.5px, transparent 0.5px);
+            background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+            background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+        }
+        h1 {
+            color: #ff1493;
+            text-align: center;
+            text-shadow: 1px 1px #000;
+            font-size: 2.5em;
+        }
+        .question {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #ff1493;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            font-family: 'Special Elite', cursive;
+            box-shadow: 2px 2px #000;
+        }
+        button:hover {
+            background-color: #ff69b4;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            text-shadow: 1px 1px #000;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: #00ff00;
+        }
+        .incorrect {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Retro Photoshop Selection Tools Quiz</h1>
+    <div id="quiz">
+        <div class="question">
+            <p>1. What is the Object Selection Tool in Photoshop primarily used for?</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q1" value="a"> To select colors in an image</label>
+                <label class="option"><input type="radio" name="q1" value="b"> To automatically select and isolate objects in an image</label>
+                <label class="option"><input type="radio" name="q1" value="c"> To crop images</label>
+                <label class="option"><input type="radio" name="q1" value="d"> To add text to images</label>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="question">
+            <p>2. Why do we utilize Select and Mask for further editing of objects?</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q2" value="a"> To change the color of objects</label>
+                <label class="option"><input type="radio" name="q2" value="b"> To resize objects</label>
+                <label class="option"><input type="radio" name="q2" value="c"> To refine and improve the edges of selections, especially for complex objects like hair or fur</label>
+                <label class="option"><input type="radio" name="q2" value="d"> To add filters to objects</label>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <div class="question">
+            <p>3. What is the purpose of holding the Option (Alt) key when using the Brush Tool in the Select and Mask area?</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q3" value="a"> To change the brush size</label>
+                <label class="option"><input type="radio" name="q3" value="b"> To switch to the Eraser Tool temporarily</label>
+                <label class="option"><input type="radio" name="q3" value="c"> To sample colors</label>
+                <label class="option"><input type="radio" name="q3" value="d"> To subtract from the selection instead of adding to it</label>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <div id="result"></div>
+
+    <script>
+        function checkAnswers() {
+            const correctAnswers = ['b', 'c', 'd'];
+            let score = 0;
+            
+            for (let i = 1; i <= correctAnswers.length; i++) {
+                const selectedAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedbackElement = document.getElementById(`feedback${i}`);
+                
+                if (selectedAnswer) {
+                    if (selectedAnswer.value === correctAnswers[i-1]) {
+                        score++;
+                        feedbackElement.textContent = "Correct!";
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.textContent = "Incorrect. Try again!";
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.textContent = "Please select an answer.";
+                    feedbackElement.className = "feedback";
+                }
+            }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `You scored ${score} out of ${correctAnswers.length}!`;
+        }
+    </script>
+</body>
+</html>
